@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Laxminarayan Steel Industries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --steel: #2c3e50;
+      --silver: #4a5568;
+      --chrome: #2d3748;
+      --accent: #2b6cb0;
+      --accent2: #3182ce;
+      --white: #1a202c;
+      --mid: #718096;
+      --bg: #edf2f7;
+      --card-bg: #f7fafc;
+      --border: #cbd5e0;
+      --metal-light: #e2e8f0;
+      --metal-shine: #ffffff;
+      --metal-dark: #a0aec0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.55) 2px,
+          rgba(255,255,255,0.55) 4px
+        ),
+        linear-gradient(
+          160deg,
+          #dde3ec 0%,
+          #edf2f7 25%,
+          #f0f4f8 40%,
+          #e8edf5 60%,
+          #dde3ec 80%,
+          #e8edf5 100%
+        );
+    }
+
+    /* ───── NAV ───── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(237,242,247,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 12px rgba(100,120,160,0.08);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: #1a2744;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: #1a2744; }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.45rem 1.2rem !important;
+      transition: background 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--accent2) !important; color: #fff !important; }
+
+    /* ───── HERO ───── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 5% 4rem;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg,
+        #c8d6e5 0%,
+        #dde6f0 20%,
+        #eef2f7 40%,
+        #f5f7fa 55%,
+        #e8edf5 70%,
+        #d0dbe8 85%,
+        #bfcfdf 100%
+      );
+    }
+    .hero-bg-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(100,130,180,0.07) 80px);
+    }
+    .hero-accent-bar {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+      opacity: 0.7;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 750px; }
+    .hero-eyebrow {
+      font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 32px; height: 1px; background: var(--accent);
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 8rem);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: #1a2744;
+    }
+    .hero-title .red { color: var(--accent); }
+    .hero-subtitle {
+      margin-top: 1.8rem;
+      font-size: 1.05rem;
+      color: var(--silver);
+      font-weight: 300;
+      max-width: 480px;
+      line-height: 1.75;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+    .badge {
+      border: 1px solid #a0b4cc;
+      padding: 0.4rem 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #5a7090;
+      font-weight: 500;
+      background: rgba(255,255,255,0.5);
+    }
+    .badge.red { border-color: var(--accent); color: var(--accent); background: rgba(43,108,176,0.07); }
+    .hero-btns {
+      display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: background 0.25s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent2); }
+    .btn-secondary {
+      border: 1px solid #a0b4cc;
+      color: var(--silver);
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+      display: inline-block;
+      background: rgba(255,255,255,0.5);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.8); }
+
+    /* ───── STATS BAR ───── */
+    .stats-bar {
+      background: linear-gradient(90deg, #d0dae8 0%, #e4eaf3 40%, #f0f4f8 60%, #d8e2ee 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-around; flex-wrap: wrap;
+      padding: 2rem 5%;
+      gap: 1rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(100,120,160,0.12);
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--mid); margin-top: 0.3rem; font-weight: 500;
+    }
+
+    /* ───── SECTION COMMON ───── */
+    section { padding: 5rem 5%; }
+    .section-eyebrow {
+      font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-eyebrow::before {
+      content: ''; width: 24px; height: 1px; background: var(--accent);
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 1px;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      color: #1a2744;
+    }
+    .section-desc {
+      color: var(--mid);
+      font-size: 0.95rem;
+      max-width: 560px;
+      line-height: 1.8;
+    }
+
+    /* ───── ABOUT ───── */
+    #about {
+      background: linear-gradient(135deg, #e8eef7 0%, #f4f7fb 50%, #e2e9f3 100%);
+      border-top: 1px solid var(--border);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; margin-top: 3rem; align-items: start;
+    }
+    .about-text p {
+      color: var(--silver); font-size: 0.95rem; line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .why-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(160,185,215,0.5);
+      background: rgba(255,255,255,0.6);
+      color: var(--silver); font-size: 0.88rem;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .why-list li:hover { border-color: var(--accent); background: rgba(255,255,255,0.9); }
+    .why-list .icon {
+      color: var(--accent); font-size: 1.1rem; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ───── PRODUCTS ───── */
+    #products { background: var(--bg); }
+    .product-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .product-card {
+      background: linear-gradient(160deg, #ffffff 0%, #f5f8fc 60%, #edf1f7 100%);
+      padding: 2rem;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .product-card:hover { background: linear-gradient(160deg, #f0f5ff 0%, #e8eef8 100%); box-shadow: 0 4px 20px rgba(43,108,176,0.1); }
+    .product-card:hover::before { transform: scaleX(1); }
+    .product-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .product-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #1a2744;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .product-specs { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .product-specs li {
+      display: flex; justify-content: space-between;
+      font-size: 0.75rem; color: var(--mid);
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .product-specs li span { color: var(--silver); font-weight: 500; }
+
+    /* ───── MATERIALS ───── */
+    #materials {
+      background: linear-gradient(135deg, #c8d6e5 0%, #dce6f2 30%, #eaf0f8 60%, #d8e4f0 100%);
+      border-top: 1px solid var(--border);
+    }
+    .materials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .material-card {
+      border: 1px solid rgba(160,185,215,0.5);
+      padding: 2rem;
+      position: relative;
+      background: linear-gradient(160deg, rgba(255,255,255,0.85) 0%, rgba(240,247,255,0.7) 100%);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 16px rgba(43,108,176,0.07), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    .material-grade {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .material-name {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .material-desc { font-size: 0.88rem; color: var(--silver); line-height: 1.7; }
+
+    /* ───── QUALITY ───── */
+    #quality { background: var(--bg); }
+    .quality-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; margin-top: 3rem; align-items: start;
+    }
+    .quality-block {
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      background: linear-gradient(160deg, #ffffff 0%, #f4f7fc 100%);
+      box-shadow: 0 2px 12px rgba(100,130,180,0.07);
+    }
+    .quality-block h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #1a2744;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .quality-block p { font-size: 0.9rem; color: var(--silver); line-height: 1.8; }
+    .features-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1rem; }
+    .features-list li {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-size: 0.88rem; color: var(--silver);
+    }
+    .features-list li::before {
+      content: '▸'; color: var(--accent); flex-shrink: 0;
+    }
+
+    /* ───── CONTACT ───── */
+    #contact {
+      background: linear-gradient(135deg, #e4ecf5 0%, #f0f5fb 50%, #dce6f0 100%);
+      border-top: 1px solid var(--border);
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr;
+      gap: 4rem; margin-top: 3rem; align-items: start;
+    }
+    .contact-item {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      padding: 1.5rem;
+      border: 1px solid rgba(160,185,215,0.5);
+      background: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      backdrop-filter: blur(6px);
+    }
+    .contact-item:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(43,108,176,0.1); }
+    .contact-icon { color: var(--accent); font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .contact-label {
+      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--mid); font-weight: 500; margin-bottom: 0.3rem;
+    }
+    .contact-value { font-size: 0.92rem; color: var(--silver); line-height: 1.7; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form input,
+    .contact-form textarea {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 0.9rem 1rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      width: 100%;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(43,108,176,0.1); }
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+    .contact-form ::placeholder { color: var(--mid); }
+
+    /* ───── FOOTER ───── */
+    footer {
+      background: linear-gradient(90deg, #c0cedf 0%, #d8e4f0 40%, #cad6e6 100%);
+      border-top: 1px solid var(--border);
+      padding: 2rem 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem; letter-spacing: 2px; color: #4a6080;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-text { font-size: 0.75rem; color: #607090; }
+    .footer-tagline {
+      font-style: italic; font-size: 0.78rem; color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    /* ───── ANIMATIONS ───── */
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid, .quality-inner, .contact-grid, .materials-grid { grid-template-columns: 1fr; }
+      .stats-bar { justify-content: center; }
+      .hero-title { font-size: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">LSI<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#materials">Materials</a></li>
+      <li><a href="#quality">Quality</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-lines"></div>
+    <div class="hero-accent-bar"></div>
+    <div class="hero-content fade-in visible">
+      <div class="hero-eyebrow">Established 2008 · Gujarat, India</div>
+      <h1 class="hero-title">
+        LAXMINARAYAN<br>
+        <span class="red">STEEL</span><br>
+        INDUSTRIES
+      </h1>
+      <p class="hero-subtitle">
+        Manufacturer and supplier of high-quality stainless steel fasteners for dealers, exporters, and industrial clients worldwide.
+      </p>
+      <div class="hero-badges">
+        <span class="badge red">ISO 9001:2008</span>
+        <span class="badge">SS 204Cu · 304 · 316</span>
+        <span class="badge">DIN / ISO Standards</span>
+        <span class="badge">Custom Manufacturing</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#products" class="btn-primary">View Products</a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat fade-in">
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat fade-in">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Product Types</div>
+    </div>
+    <div class="stat fade-in">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Steel Grades</div>
+    </div>
+    <div class="stat fade-in">
+      <div class="stat-num">ISO</div>
+      <div class="stat-label">Certified</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="fade-in">
+        <div class="section-eyebrow">About Us</div>
+        <h2 class="section-title">PRECISION AT THE<br>CORE OF EVERY BOLT</h2>
+        <div class="about-text">
+          <p>Laxminarayan Steel Industries, established in 2008, is a trusted manufacturer and supplier of high-quality stainless steel fasteners based in Wadhwan City, Surendranagar, Gujarat.</p>
+          <p>With years of industry experience and a strong focus on precision engineering, we cater to a wide range of industrial applications. Our products are manufactured using premium-grade raw materials, ensuring durability, corrosion resistance, and superior performance.</p>
+          <p>Backed by advanced infrastructure and strict quality control systems, we deliver products that consistently meet international standards for dealers, exporters, and industrial clients.</p>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="section-eyebrow">Why Choose Us</div>
+        <h2 class="section-title">OUR COMMITMENT<br>TO EXCELLENCE</h2>
+        <ul class="why-list">
+          <li><span class="icon">✦</span> ISO 9001:2008 Certified Manufacturing</li>
+          <li><span class="icon">✦</span> High-Precision Engineering</li>
+          <li><span class="icon">✦</span> Strict Quality Control at Every Stage</li>
+          <li><span class="icon">✦</span> Wide Product Range</li>
+          <li><span class="icon">✦</span> Custom Manufacturing Available</li>
+          <li><span class="icon">✦</span> Timely Delivery & Reliable Supply</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="product-header fade-in">
+      <div>
+        <div class="section-eyebrow">Product Range</div>
+        <h2 class="section-title">STAINLESS STEEL<br>FASTENERS</h2>
+      </div>
+      <p class="section-desc">Comprehensive range covering everything from machine screws to special custom fasteners for industrial applications.</p>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card fade-in">
+        <div class="product-num">01</div>
+        <div class="product-name">CSK Phillips Self Tapping Screw</div>
+        <ul class="product-specs">
+          <li>Size <span>#4 – #10</span></li>
+          <li>Length <span>6.5 mm – 100 mm</span></li>
+          <li>Thread <span>AB Type / B Type</span></li>
+          <li>Standard <span>DIN / ISO</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-num">02</div>
+        <div class="product-name">Pan Phillips Machine Screw</div>
+        <ul class="product-specs">
+          <li>Size (MM) <span>M4 – M6</span></li>
+          <li>Size (BSW) <span>5/32 – 1/4 B.S.W</span></li>
+          <li>Length <span>6 mm – 80 mm</span></li>
+          <li>Standard <span>DIN / ISO</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-num">03</div>
+        <div class="product-name">Button Head Screw</div>
+        <ul class="product-specs">
+          <li>Size (MM) <span>M4 – M6</span></li>
+          <li>Size (BSW) <span>5/32 – 1/4 B.S.W</span></li>
+          <li>Length <span>6 mm – 80 mm</span></li>
+          <li>Drive <span>Allen / Hex Socket</span></li>
+          <li>Standard <span>DIN / ISO</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-num">04</div>
+        <div class="product-name">Pan Phillips Self Tapping Screw</div>
+        <ul class="product-specs">
+          <li>Size <span>#4 – #10</span></li>
+          <li>Length <span>6.5 mm – 100 mm</span></li>
+          <li>Thread <span>AB Type / B Type</span></li>
+          <li>Standard <span>DIN / ISO</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-num">05</div>
+        <div class="product-name">Pan Combi Machine Screw</div>
+        <ul class="product-specs">
+          <li>Size (MM) <span>M4 – M6</span></li>
+          <li>Size (BSW) <span>5/32 – 1/4 B.S.W</span></li>
+          <li>Length <span>6 mm – 80 mm</span></li>
+          <li>Standard <span>DIN / ISO</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-num">06</div>
+        <div class="product-name">Allen CSK Machine Screw</div>
+        <ul class="product-specs">
+          <li>Size (MM) <span>M4 – M6</span></li>
+          <li>Size (BSW) <span>5/32 – 1/4 B.S.W</span></li>
+          <li>Length <span>6 mm – 80 mm</span></li>
+          <li>Standard <span>DIN 7991 / ISO</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-num">07</div>
+        <div class="product-name">Torx Head Machine Screw</div>
+        <ul class="product-specs">
+          <li>Size (MM) <span>M4 – M6</span></li>
+          <li>Size (BSW) <span>5/32 – 1/4 B.S.W</span></li>
+          <li>Length <span>6 mm – 80 mm</span></li>
+          <li>Standard <span>DIN / ISO</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-num">08</div>
+        <div class="product-name">Cheese Head Slotted Machine Screw</div>
+        <ul class="product-specs">
+          <li>Size (MM) <span>M4 – M6</span></li>
+          <li>Size (BSW) <span>5/32 – 1/4 B.S.W</span></li>
+          <li>Length <span>6 mm – 80 mm</span></li>
+          <li>Standard <span>DIN 84 / ISO</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-num">09</div>
+        <div class="product-name">J-Bolt & U-Bolt with Flange Nut</div>
+        <ul class="product-specs">
+          <li>Type <span>Solar Bolt</span></li>
+          <li>Material <span>SS 304</span></li>
+          <li>Nut <span>Flange Nut Included</span></li>
+          <li>Application <span>Solar Panel Mounting</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MATERIALS -->
+  <section id="materials">
+    <div class="fade-in">
+      <div class="section-eyebrow">Raw Materials</div>
+      <h2 class="section-title">PREMIUM STEEL<br>GRADES</h2>
+      <p class="section-desc">We use only certified, premium-grade stainless steel to ensure maximum durability and performance across all applications.</p>
+    </div>
+    <div class="materials-grid">
+      <div class="material-card fade-in">
+        <div class="material-grade">204Cu</div>
+        <div class="material-name">SS Grade 204Cu</div>
+        <p class="material-desc">A copper-bearing austenitic grade offering enhanced cold-forming and heading properties. The added copper improves ductility and machinability, making it ideal for precision fastener manufacturing with good corrosion resistance at a competitive cost.</p>
+      </div>
+      <div class="material-card fade-in">
+        <div class="material-grade">304</div>
+        <div class="material-name">SS Grade 304</div>
+        <p class="material-desc">The most widely used stainless steel grade, offering excellent corrosion resistance, weldability, and surface finish quality — suitable for food processing, pharmaceutical, marine, and heavy industrial applications.</p>
+      </div>
+      <div class="material-card fade-in">
+        <div class="material-grade">316</div>
+        <div class="material-name">SS Grade 316</div>
+        <p class="material-desc">The marine-grade alloy with added molybdenum for superior resistance to pitting, crevice corrosion, and chemical exposure — preferred for harsh chloride-rich and high-salinity environments.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUALITY -->
+  <section id="quality">
+    <div class="fade-in">
+      <div class="section-eyebrow">Quality & Infrastructure</div>
+      <h2 class="section-title">BUILT ON STANDARDS,<br>DRIVEN BY PRECISION</h2>
+    </div>
+    <div class="quality-inner">
+      <div class="fade-in">
+        <div class="quality-block">
+          <h3>Quality Assurance</h3>
+          <p>Quality is at the core of our operations. Each product undergoes strict inspection at multiple stages of manufacturing. Our dedicated quality control team ensures compliance with international standards and customer specifications. We are ISO 9001:2008 certified, reflecting our commitment to consistent quality across every batch.</p>
+        </div>
+        <div class="quality-block" style="margin-top: 1.5rem;">
+          <h3>Infrastructure</h3>
+          <p>Our manufacturing unit is equipped with modern machinery and advanced tools that enable us to produce high-quality fasteners with consistency and efficiency. Our facility is designed to handle both large-scale production and custom, specialized orders.</p>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="quality-block">
+          <h3>Key Product Features</h3>
+          <ul class="features-list">
+            <li>Sharp threads for faster installation</li>
+            <li>Strong grip and high holding power</li>
+            <li>Precision manufacturing for perfect fitting</li>
+            <li>Corrosion-resistant stainless steel construction</li>
+            <li>Suitable for industrial and heavy-duty applications</li>
+            <li>DIN / ISO compliant across all product lines</li>
+            <li>Multiple thread types: BSW, MM, UNC, UNF, AB, B</li>
+            <li>Custom manufacturing to client specifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="fade-in">
+      <div class="section-eyebrow">Contact</div>
+      <h2 class="section-title">GET IN TOUCH</h2>
+      <p class="section-desc">Reach out for product inquiries, custom orders, or dealer/exporter partnerships.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-in">
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div>
+            <div class="contact-label">Address</div>
+            <div class="contact-value">Plot No. 39, Phase-1, GIDC Industrial Estate,<br>Ambavadi, Wadhwan City,<br>Surendranagar – 363035, Gujarat, India</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">laxminarayansteelindustries@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📞</span>
+          <div>
+            <div class="contact-label">Mobile</div>
+            <div class="contact-value">+91 94263 11614<br>+91 9601667791</div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="contact-form">
+          <input type="text" placeholder="Your Name" />
+          <input type="email" placeholder="Email Address" />
+          <input type="text" placeholder="Company / Organization" />
+          <textarea placeholder="Your inquiry or message…"></textarea>
+          <a href="mailto:laxminarayansteelindustries@gmail.com" class="btn-primary" style="text-align:center;">Send Inquiry</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">LAXMINARAYAN <span>STEEL</span> INDUSTRIES</div>
+    <div class="footer-tagline">"Precision Fasteners for Stronger Connections"</div>
+    <div class="footer-text">© 2025 Laxminarayan Steel Industries · Surendranagar, Gujarat</div>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
